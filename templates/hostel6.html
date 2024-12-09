@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hostel F Students</title>
+
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+
+
+        
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 2rem;
+    background-color: #fafafa;
+    color: black;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Logo link styling */
+.logo-link {
+    text-decoration: none;
+}
+
+/* Logo styling */
+.logo {
+    height: 50px; /* Adjust size as needed */
+    width: auto;
+    cursor: pointer;
+}
+
+/* Header title styling */
+.header-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin: 0;
+    flex-grow: 1; /* Ensures proper spacing between logo and title */
+    text-align: center;
+    color: black;
+}
+
+
+
+        .filter-box {
+    background-color: #f5f5f5;
+    padding: 20px;
+    border-radius: 5px;
+    margin-right: 20px;
+    margin-top: 30px; /* Adjust this value as needed */
+}
+
+
+        .room-container {
+            position: relative;
+            text-align: center;
+            margin-bottom: 10px; 
+        }
+
+        .room-box {
+            width: 80px; 
+            height: 80px;
+            margin: auto;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+            font-weight: bold;
+            color: white;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .room-box:hover {
+            transform: scale(1.1);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .vacant {
+            background-color: #f94449;
+        }
+
+        .occupied {
+            background-color: #64b7f6;
+        }
+
+
+        .hover-box {
+    position: absolute;
+    background-color: #ffffff; 
+    border: 1px solid #ddd; 
+    padding: 15px; 
+    border-radius: 8px; 
+    display: none;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15); 
+    z-index: 1000;
+    font-size: 1rem; /* Increased font size for readability */
+    text-align: left;
+
+    width: 800px;
+
+    max-width: 90%; 
+    transition: all 0.3s ease-in-out; 
+
+    /* Gradient border effect */
+    background-image: linear-gradient(120deg, #e0f7fa, #ffffff);
+}
+
+
+.hover-box:hover {
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+    transform: translateY(-5px); /* Subtle lift effect */
+}
+
+
+
+        .room-container:hover .hover-box {
+            display: block;
+        }
+
+        .stats-container {
+    display: flex;
+    justify-content: space-between;  
+    margin: 2rem 0; 
+    padding: 1rem;  
+    background-color: #f9f9f9;
+    border-radius: 6px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+    width: 90%; 
+    max-width: 1200px; 
+    margin-left: auto;  
+    margin-right: auto; 
+    min-height: 150px;  
+}
+
+.stat-box {
+    text-align: center;
+    padding: 0.5rem;
+    background: #e7e7e7;
+    border-radius: 6px;
+    width: 150px; 
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    margin: 0 0.5rem; 
+    background-color: #ffcbd1
+}
+
+.stat-number {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #333;
+    margin: 0;
+}
+
+.stat-label {
+    font-size: 0.9rem;
+    color: #666;
+    margin: 0.3rem 0 0;
+}
+/* Form container styling */
+#roomForm {
+    width: 50%;
+    max-width: 500px;
+    margin: 2rem auto; /* Center the form */
+    padding: 1.5rem;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    font-family: Arial, sans-serif;
+}
+
+/* Form group styling */
+#roomForm .form-group {
+    margin-bottom: 1rem;
+}
+
+/* Label styling */
+#roomForm label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+    color: #333;
+}
+
+/* Input styling */
+#roomForm input[type="text"],
+#roomForm input[type="number"],
+#roomForm input[type="date"] {
+    width: 100%;
+    padding: 0.5rem;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #fff;
+    transition: border-color 0.3s ease;
+}
+
+/* Hover and focus effect for inputs */
+#roomForm input:focus {
+    outline: none;
+    border-color: #007bff;
+    box-shadow: 0 0 4px rgba(0, 123, 255, 0.5);
+}
+
+/* Submit button styling */
+#roomForm .btn {
+    display: inline-block;
+    width: 100%;
+    padding: 0.75rem;
+    font-size: 1rem;
+    font-weight: bold;
+    color: #fff;
+    background-color: #007bff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+/* Button hover effect */
+#roomForm .btn:hover {
+    background-color: #0056b3;
+}
+
+/* Form container spacing */
+#roomForm div {
+    margin-bottom: 1rem;
+}
+.deallocate-form {
+    max-width: 400px;
+    margin: 50px auto;
+    /* margin-left: 15px; */
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    font-family: Arial, sans-serif;
+}
+
+.deallocate-form .form-group {
+    margin-bottom: 15px;
+}
+
+.deallocate-form label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+.deallocate-form select,
+.deallocate-form input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1em;
+}
+
+.deallocate-form select:focus,
+.deallocate-form input:focus {
+    border-color: #4cbfa6;
+    outline: none;
+    box-shadow: 0 0 5px rgba(76, 191, 166, 0.5);
+}
+
+.btn-submit {
+    display: inline-block;
+    width: 100%;
+    padding: 10px;
+    background-color: #4cbfa6;
+    color: white;
+    font-size: 1em;
+    font-weight: bold;
+    text-align: center;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn-submit:hover {
+    background-color: #3aa388;
+}
+.styled-form {
+    max-width: 400px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    font-family: Arial, sans-serif;
+}
+
+.styled-form .form-group {
+    margin-bottom: 15px;
+}
+
+.styled-form label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+.styled-form select,
+.styled-form input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1em;
+}
+
+.styled-form select:focus,
+.styled-form input:focus {
+    border-color: #4cbfa6;
+    outline: none;
+    box-shadow: 0 0 5px rgba(76, 191, 166, 0.5);
+}
+
+.btn-submit {
+    display: inline-block;
+    width: 100%;
+    padding: 10px;
+    background-color: #4cbfa6;
+    color: white;
+    font-size: 1em;
+    font-weight: bold;
+    text-align: center;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn-submit:hover {
+    background-color: #3aa388;
+}
+
+.deallocate-btn {
+    background-color: #4CAF50; /* Green */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.deallocate-btn:hover {
+    background-color: #45a049; /* Darker green on hover */
+}
+
+/* Adjusting the form visibility when toggled */
+.deallocate-form {
+    display: none;
+}
+
+
+
+</style>
+
+
+</head>
+
+<body>
+
+    <!-- Header -->
+    <!-- <header class="header">
+        <a href="index.html" class="logo-link">
+            <img src="https://iitj.ac.in/images/logo/Design-of-New-Logo-of-IITJ-2.png" alt="Institute Logo" class="logo">
+        </a>
+        <h1 class="header-title">Hostel - I3</h1>
+    </header> -->
+
+    <header class="header">
+        <a href="index.html" class="logo-link">
+            <img src="https://iitj.ac.in/images/logo/Design-of-New-Logo-of-IITJ-2.png" alt="Institute Logo" class="logo">
+        </a>
+        <h1 class="header-title">Hostel - I3</h1>
+    
+        <!-- Add the "Deallocate Rooms" button here -->
+        <button type="button" onclick="openForm()" class="deallocate-btn">Deallocate Rooms</button>
+    </header>
+    
+
+
+
+    <div class="stats-container">
+        <div class="stat-box">
+            <p class="stat-number">{{ total_rooms }}</p>
+            <p class="stat-label">Total Rooms</p>
+        </div>
+        <div class="stat-box">
+            <p class="stat-number">{{ vacant_rooms }}</p>
+            <p class="stat-label">Vacant Rooms</p>
+        </div>
+        <div class="stat-box">
+            <p class="stat-number">{{ occupied_rooms }}</p>
+            <p class="stat-label">Occupied Rooms</p>
+        </div>
+      </div>
+
+    </div>
+
+
+    <form action="/deallocate-rooms" method="POST" class="deallocate-form">
+        <div class="form-group">
+            <label for="hostel_id">Hostel ID:</label>
+            <select name="hostel_id" id="hostel_id" required>
+                <option value="">Select Hostel</option>
+                <option value="1">Hostel A</option>
+                <option value="2">Hostel B</option>
+                <option value="3">Hostel C</option>
+                <option value="4">Hostel D</option>
+                <option value="5">Hostel E</option>
+                <option value="6">Hostel F</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="batch">Batch:</label>
+            <input type="text" name="batch" id="batch" placeholder="Enter Batch" required>
+        </div>
+        <button type="submit" class="btn-submit">Deallocate Rooms</button>
+    </form>
+
+
+
+   
+
+    
+    
+
+    <div class="container mt-3">
+        <div class="row">
+            <!-- Filter Box -->
+            <div class="col-md-3">
+                <div class="filter-box">
+                    <h5>Filter By:</h5>
+                    <div>
+                        <h6>Room Status</h6>
+                        <div>
+                            <input type="checkbox" id="vacant" name="status" value="vacant">
+                            <label for="vacant">Vacant Rooms</label>
+                        </div>
+                        <div>
+                            <input type="checkbox" id="occupied" name="status" value="occupied">
+                            <label for="occupied">Occupied Rooms</label>
+                        </div>
+                    </div>
+                    <div class="mt-3">
+                        <h6>Batch</h6>
+                        <div>
+                            <input type="checkbox" id="batch2022" name="batch" value="2022">
+                            <label for="batch2022">2022</label>
+                        </div>
+                        <div>
+                            <input type="checkbox" id="batch2023" name="batch" value="2023">
+                            <label for="batch2023">2023</label>
+                        </div>
+                        <div>
+                            <input type="checkbox" id="batch2024" name="batch" value="2024">
+                            <label for="batch2024">2024</label>
+                        </div>
+                        <div>
+                            <input type="checkbox" id="batch2025" name="batch" value="2025">
+                            <label for="batch2025">2025</label>
+                        </div>
+                    </div>
+                    <div class="mt-3">
+                        <h6>Floor</h6>
+                        <div>
+                            <input type="checkbox" id="floor1" name="floor" value="1">
+                            <label for="floor1">1st Floor</label>
+                        </div>
+                        <div>
+                            <input type="checkbox" id="floor2" name="floor" value="2">
+                            <label for="floor2">2nd Floor</label>
+                        </div>
+                        <div>
+                            <input type="checkbox" id="floor3" name="floor" value="3">
+                            <label for="floor3">3rd Floor</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-9">
+                <div class="row">
+                    {% for student in hostel_f_data %}
+                    <div class="col-lg-2 col-md-3 col-sm-4 col-4 room-container" id="room-{{ student.room_num }}" 
+                         data-status="{% if student.student_name is none %}vacant{% else %}occupied{% endif %}">
+                        
+                        <div class="room-box {% if student.student_name is none %}vacant{% else %}occupied{% endif %}" 
+                             onclick="{% if (student).student_name is none %}openForm('{{ student.room_num }}'){% else %}window.location.href='/student-details/{{ student.room_num }}'{% endif %}">
+                            {{ student.room_num }}
+                        </div>
+
+                        {% if student.student_name is not none %}
+                        <div class="hover-box">
+                            <strong>Room:</strong> {{ student.room_num }}<br>
+                            <strong>Name:</strong> {{ student.student_name }}<br>
+                            <strong>Roll:</strong> {{ student.roll_num }}<br>
+                            <strong>Branch:</strong> {{ student.Branch }}<br>
+                            <strong>Batch:</strong> {{ student.Batch }}
+                        </div>
+                        {% endif %}
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Form Modal -->
+    <div id="roomFormModal" class="modal fade" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Allocate Room</h5>
+                    <button type="button" class="close" onclick="closeForm()">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <form id="roomForm" method="POST" action="/allocate-room">
+                        <input type="hidden" id="roomNumber" name="room_number">
+                        <div class="form-group">
+                            <label for="studentName">Name</label>
+                            <input type="text" class="form-control" id="studentName" name="student_name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="batch">Batch</label>
+                            <input type="text" class="form-control" id="batch" name="batch" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="branch">Branch</label>
+                            <input type="text" class="form-control" id="branch" name="branch" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="rollNum">Roll Number</label>
+                            <input type="text" class="form-control" id="rollNum" name="roll_num" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="hostel_id">Hostel ID</label>
+                            <input type="number" class="form-control" id="hostelId" name="hostel_id" min="1" max="6" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Allocate Room</button>
+                    </form>
+
+
+
+                    <form id="searchRoomForm" method="POST" action="/search-room" class="styled-form">
+                        <div class="form-group">
+                            <label for="hostelId">Hostel ID:</label>
+                            <select id="hostelId" name="hostel_id" required>
+                                <option value="" disabled selected>Select Hostel ID</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="searchType">Search By:</label>
+                            <select id="searchType" name="search_type" required>
+                                <option value="" disabled selected>Select an option</option>
+                                <option value="name">Name</option>
+                                <option value="roll">Roll Number</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="searchValue">Enter Name or Roll Number:</label>
+                            <input type="text" id="searchValue" name="search_value" required>
+                        </div>
+                        <button type="submit" class="btn-submit">Search Room</button>
+                    </form>
+                    
+                    
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        // Function to filter rooms
+        function filterRooms() {
+            // Get selected filter values
+            const vacantChecked = document.getElementById("vacant").checked;
+            const occupiedChecked = document.getElementById("occupied").checked;
+    
+            const batchFilters = Array.from(document.querySelectorAll('input[name="batch"]:checked')).map(input => input.value);
+            const floorFilters = Array.from(document.querySelectorAll('input[name="floor"]:checked')).map(input => input.value);
+    
+            // Iterate through all room containers
+            const rooms = document.querySelectorAll(".room-container");
+            rooms.forEach(room => {
+                const status = room.getAttribute("data-status");
+                const batch = room.getAttribute("data-batch");
+                const floor = room.getAttribute("data-floor");
+    
+                // Check conditions
+                const matchesStatus = (vacantChecked && status === "vacant") || (occupiedChecked && status === "occupied") || (!vacantChecked && !occupiedChecked);
+                const matchesBatch = batchFilters.length === 0 || batchFilters.includes(batch);
+                const matchesFloor = floorFilters.length === 0 || floorFilters.includes(floor);
+    
+                // Show or hide based on filters
+                if (matchesStatus && matchesBatch && matchesFloor) {
+                    room.style.display = "block";
+                } else {
+                    room.style.display = "none";
+                }
+            });
+        }
+    
+        // Add event listeners to checkboxes
+        const filterInputs = document.querySelectorAll('.filter-box input[type="checkbox"]');
+        filterInputs.forEach(input => {
+            input.addEventListener("change", filterRooms);
+        });
+    </script>
+    
+
+<script>
+    function openForm(roomNumber) {
+        document.getElementById('roomNumber').value = roomNumber;
+        $('#roomFormModal').modal('show');
+    }
+
+    function closeForm() {
+        $('#roomFormModal').modal('hide');
+    }
+   
+ 
+</script>
+
+<script>
+    // Function to toggle the form visibility
+    function openForm() {
+        const form = document.querySelector('.deallocate-form');
+        form.style.display = (form.style.display === 'block') ? 'none' : 'block';
+    }
+</script>
+
+</body>
+
+</html>
+

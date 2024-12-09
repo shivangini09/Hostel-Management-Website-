@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to IITJ</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet"> <!-- Google Font -->
+    <style>
+        body, html {
+            height: 100%;
+            margin: 0;
+            font-family: 'Poppins', sans-serif;
+            background-image: url('https://images.indianexpress.com/2024/03/IIT-Jodhpur_2.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        .top-nav {
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.7);
+    padding: 10px 20px; /* Reduce padding to make the navbar compact */
+    z-index: 10;
+    display: flex;
+    justify-content: space-between;
+    align-items: center; /* Vertically aligns items */
+}
+
+.top-nav .logo img {
+    height: 40px; /* Reduce the logo size */
+    width: auto;
+    margin-left: 10px; 
+    margin-right: 40px;
+}
+
+.nav-links {
+    display: flex; 
+    gap: 15px; 
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    font-size: 1em; /* Adjust font size for balance */
+    padding: 5px 10px; /* Minimal padding to reduce overall height */
+}
+
+.nav-links a:hover {
+    color: #4cbfa6;
+}
+
+
+        .dashboard-container {
+            padding: 20px;
+            border-radius: 15px;
+            margin: 20px;
+            color: black;
+            text-align: center;
+            background-color: rgba(255, 255, 255, 0.8);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            margin-top: 80px;
+        }
+
+        .form-container {
+            margin-bottom: 30px;
+        }
+
+        /* Form styling */
+        .form-container input, .form-container select, .form-container button {
+            padding: 10px;
+            margin: 10px;
+            width: 200px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .form-container button {
+            background-color: #4cbfa6;
+            color: white;
+            cursor: pointer;
+        }
+
+        .form-container button:hover {
+            background-color: #333;
+        }
+
+        /* Grid Container for Hostels */
+        .hostel-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        /* Each Hostel Card */
+        .hostel-card {
+            background-color: #ffffff;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            position: relative;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .hostel-card:hover {
+            transform: scale(1.05);
+        }
+
+        /* Image in Hostel Card */
+        .hostel-card img {
+            width: 100%;
+            height: 200px; /* Fixed height for consistent sizing */
+            object-fit: cover; /* Ensures the image covers the whole area */
+        }
+
+        /* Hostel Info */
+        .hostel-info {
+            padding: 15px;
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            position: absolute;
+            bottom: 10px;
+            width: 100%;
+            text-align: center;
+        }
+
+        .hostel-info h3 {
+            margin: 0;
+            font-size: 1.2em;
+        }
+
+        .hostel-info p {
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- <div class="top-nav">
+        <a href="about.html">About</a>
+        <a href="contact.html">Contacts</a>
+        <a href="#facilities">Facilities</a>
+        <a href="hostels.html">Hostels</a>
+    </div> -->
+
+    <div class="top-nav">
+        <div class="nav-links">
+            <a href="about.html">About</a>
+            <a href="contact.html">Contacts</a>
+            <a href="#facilities">Facilities</a>
+            <a href="hostels.html">Hostels</a>
+        </div>
+        <a href="index.html" class="logo">
+            <img src="https://iitj.ac.in/images/logo/Design%20of%20New%20Logo%20of%20IITJ-2%20PNG%20BW.png" alt="IIT Jodhpur Logo">
+        </a>
+    </div>
+    
+
+    <div class="dashboard-container">
+
+        <!-- Form for CSV Upload and Hostel Allocation -->
+        <!-- <div class="form-container">
+            <h2>Allocate Rooms to Students</h2>
+            <form action="/allocate_rooms" method="POST" enctype="multipart/form-data">
+                <label for="csvFile">Upload CSV File:</label>
+                <input type="file" name="csv_file" id="csvFile" required>
+                <label for="hostelName">Select Hostel:</label>
+                <select name="hostel_name" id="hostelName" required>
+                    <option value="Hostel 1">Hostel 1</option>
+                    <option value="Hostel 2">Hostel 2</option>
+                    <option value="Hostel 3">Hostel 3</option>
+                    <option value="Hostel 4">Hostel 4</option>
+                    <option value="Hostel 5">Hostel 5</option>
+                    <option value="Hostel 6">Hostel 6</option>
+                </select>
+                <button type="submit">Allocate Rooms</button>
+            </form> -->
+
+            <div class="form-container">
+                <!-- Section to Display Flash Messages -->
+                {% with messages = get_flashed_messages(with_categories=true) %}
+                  {% if messages %}
+                    <div class="flash-messages">
+                      {% for category, message in messages %}
+                        <div class="alert {{ category }}">
+                          {{ message }}
+                        </div>
+                      {% endfor %}
+                    </div>
+                  {% endif %}
+                {% endwith %}
+            
+                <h2>Allocate Rooms to Students</h2>
+                <form action="/allocate_rooms" method="POST" enctype="multipart/form-data">
+                    <label for="csvFile">Upload CSV File:</label>
+                    <input type="file" name="csv_file" id="csvFile" required>
+                    <label for="hostelName">Select Hostel:</label>
+                    <select name="hostel_name" id="hostelName" required>
+                        <option value="Hostel 1">Hostel 1</option>
+                        <option value="Hostel 2">Hostel 2</option>
+                        <option value="Hostel 3">Hostel 3</option>
+                        <option value="Hostel 4">Hostel 4</option>
+                        <option value="Hostel 5">Hostel 5</option>
+                        <option value="Hostel 6">Hostel 6</option>
+                    </select>
+                    <button type="submit">Allocate Rooms</button>
+                </form>
+        
+            
+            
+
+            
+            
+        </div>   
+        
+
+        <!-- Hostel Cards Section -->
+        <div id="hostels" class="hostel-container">
+            <div class="hostel-card">
+                <a href="hostel1.html">
+                    <img src="http://swc.iitj.ac.in/images/hostel/image11.jpg" alt="Hostel 1">
+                </a>
+                
+                <div class="hostel-info">
+                    <h3>Hostel 1</h3>
+                    <p>Type: Girls</p>
+                </div>
+            </div>
+
+            <div class="hostel-card">
+                <a href="hostel2.html"><img src="http://swc.iitj.ac.in/images/hostel/image3.jpg" alt="Hostel 2"></a>
+                <div class="hostel-info">
+                    <h3>Hostel 2</h3>
+                    <p>Type: Girls</p>
+                </div>
+            </div>
+            <div class="hostel-card">
+                <a href="hostel3.html"><img src="http://swc.iitj.ac.in/images/hostel/image2.jpg" alt="Hostel 3"></a>
+                <div class="hostel-info">
+                    <h3>Hostel 3</h3>
+                    <p>Type: Girls</p>
+                </div>
+            </div>
+            <div class="hostel-card">
+                <a href="hostel4.html"><img src="http://swc.iitj.ac.in/images/hostel/image5.jpg" alt="Hostel 4"></a>
+                
+                <div class="hostel-info">
+                    <h3>Hostel 4</h3>
+                    <p>Type: Boys</p>
+                </div>
+            </div>
+            <div class="hostel-card">
+                <a href="hostel5.html"><img src="http://swc.iitj.ac.in/images/hostel/image1.jpg" alt="Hostel 5"></a>
+                <div class="hostel-info">
+                    <h3>Hostel 5</h3>
+                    <p>Type: Girls</p>
+                </div>
+            </div>
+            <div class="hostel-card">
+                <a href="hostel6.html"><img src="http://swc.iitj.ac.in/images/hostel/image10.jpg" alt="Hostel 6"></a>
+                <div class="hostel-info">
+                    <h3>Hostel 6</h3>
+                    <p>Type: Boys</p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <script src="script.js"></script>
+
+
+</body>
+</html>
+

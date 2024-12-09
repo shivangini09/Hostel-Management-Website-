@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Student</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container mt-5">
+    <h2>Add New Student</h2>
+    <form action="/add-student" method="POST">
+        <div class="form-group">
+            <label for="student_name">Student Name:</label>
+            <input type="text" class="form-control" id="student_name" name="student_name" required>
+        </div>
+        <div class="form-group">
+            <label for="roll_number">Roll Number:</label>
+            <input type="text" class="form-control" id="roll_number" name="roll_number" required>
+        </div>
+        <div class="form-group">
+            <label for="branch">Branch:</label>
+            <input type="text" class="form-control" id="branch" name="branch" required>
+        </div>
+        <div class="form-group">
+            <label for="year">Year:</label>
+            <input type="number" class="form-control" id="year" name="year" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Add Student</button>
+    </form>
+</div>
+</body>
+</html>
