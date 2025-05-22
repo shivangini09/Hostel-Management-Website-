@@ -20,5 +20,5 @@ A full-stack web application for efficient and streamlined hostel room allocatio
 
 - **Backend**: Flask (Python)
 - **Frontend**: HTML5, CSS3
-- **Database**: SQL (SQLite/MySQL/PostgreSQL - depending on your setup)
+- **Database**: SQL (SQLite)
 
